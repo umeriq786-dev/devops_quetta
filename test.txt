@@ -1,3 +1,6 @@
 This is first line but it is untracked
 
 This is new line
+
+
+This is third line but it will be tracked because it is added in git
