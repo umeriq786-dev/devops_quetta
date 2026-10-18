@@ -1,0 +1,23 @@
+name: Deploy app to staging server
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Ec2 Staging VM
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_VM_IP }}
+          username: ${{ secrets.PROD_VM_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script: |
+            cd /var/www/html/devops_quetta
+            git pull origin staging
+
+            echo "Deployment completed successfully"
